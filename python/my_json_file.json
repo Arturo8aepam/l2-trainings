@@ -1,19 +1,20 @@
-ndom_project_id" : "true", 
+{
+	"random_project_id" : "true", 
     "random_project_id_length": 4, 
-        "org_id": "885933725074", 
-	    "billing_account": "00CB38-2E2BF1-C51D03", 
-	        "svpc_host_project_id": "",    
-		    "folder_id": "52799842268",
-		        "labels" : {
-				        "project-owner" :"luis_mendez",
-					        "tech-owner" :""
-						    },     
-						        "auto_create_network": "false", 
-							    "activate_apis" :[
-								            "compute.googleapis.com",
-									            "oslogin.googleapis.com"
-										        ],
-											    "default_service_account" :"deprivilege", 
-											        "create_project_sa" : "false", 
-												    "lien" : "true"     
-												    } 
+    "org_id": "885933725074", 
+	"billing_account": "00CB38-2E2BF1-C51D03", 
+	"svpc_host_project_id": "",    
+	"folder_id": "52799842268",
+	"labels" : {
+		"project-owner" :"luis_mendez",
+		"tech-owner" :""
+		},     
+	"auto_create_network": "false", 
+	"activate_apis" :[
+		"compute.googleapis.com",
+		"oslogin.googleapis.com"
+		],
+	"default_service_account" :"deprivilege", 
+	"create_project_sa" : "false", 
+	"lien" : "true"     
+} 
