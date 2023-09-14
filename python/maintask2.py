@@ -14,6 +14,7 @@ def rotate_log_files(log_dir):
     filepath = os.path.join(log_dir, file)
 
     #10MB = 1048576
+    #100MB = 104857600
     #for testing = 100000
     if os.path.isfile(filepath) and os.path.getsize(filepath) > 1048576:
       # The file size is greater than 10MB, so rotate it.
