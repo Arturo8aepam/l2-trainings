@@ -1,0 +1,40 @@
+Python task L1->L2 process
+
+#Task1
+
+This script first opens the JSON file and loads the data into a Python dictionary. 
+It defines a recursive function called _validate_json(). 
+This function takes a JSON data object and a list of keys as input and validates if all values for all keys in the JSON data object are not in blank. 
+If a key has an empty value, the key is added to the empty_keys list.
+
+The main function then defines a JSON data file and calls the validate_json() function on it. 
+The validate_json() function prints the list of keys with empty values.
+
+To run this code, you need to first create a JSON file and save it in the same directory as the script. 
+Then, you can run the script by passing the path to the JSON file as an argument. 
+For example, to run the script on the JSON file my_json_file.json, you would run the following command:
+
+python validate_json.py my_json_file.json
+
+If there are any keys in the JSON file with empty values, the script will print the list of keys. 
+Otherwise, the script will print a message saying that all values for keys inside the JSON file are not in blank.
+
+#Task2
+
+This script first defines a function called rotate_log_files(). 
+This function takes a directory as input and rotates all log files in the directory that have surpassed the 10MB size. 
+The function works by first checking if the file is a file and its size is greater than 10MB. 
+If the file meets these conditions, the function then creates a new file with the original name and renames the original file by appending 
+the current date and time.
+
+The main function then defines the directory where the log files are located and calls the rotate_log_files() function on it.
+
+For testing upload the +10Mb file to the shell /home/ochoamendoza or /var/logs and then run the script
+
+To run this code, you need to first create a directory where the log files are located. 
+Then, you can save the script as a Python file and run it by passing the path to the directory as an argument. 
+For example, to run the script on the directory /var/log, you would run the following command:
+
+python rotate_log_files.py /var/log
+
+This will rotate all log files in the directory /var/log that have surpassed the 10MB size.
