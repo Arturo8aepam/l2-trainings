@@ -16,9 +16,11 @@ def rotate_log_files(log_dir):
     #10MB = 1048576
     #100MB = 104857600
     #for testing = 100000
-    if os.path.isfile(filepath) and os.path.getsize(filepath) > 1048576:
+    if os.path.isfile(filepath) and os.path.getsize(filepath) > 104857600:
       # The file size is greater than 10MB, so rotate it.
       logging.info("Rotating log file: %s", filepath)
+      
+      #TODO: copiar el archivo y mantener el size, validar si ya se le hizo una validacion con una palabra if path contains rotation no validation needed
 
       # Create a new file with the original name.
       with open(filepath, "w") as f:
@@ -27,8 +29,8 @@ def rotate_log_files(log_dir):
       # Rename the original file by appending the current date and time.
       new_filepath = filepath + ".%s" % time.strftime("%Y%m%d_%H%M%S")
       os.rename(filepath, new_filepath)
-      print("El que pesa mas de 10MB: ", filepath)
-      print("El nuevo: ", new_filepath)
+      print("File that weight more than 10MB: ", filepath)
+      print("New File name: ", new_filepath)
 
 
 
