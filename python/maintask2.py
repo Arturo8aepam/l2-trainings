@@ -2,8 +2,9 @@ import logging
 import logging.handlers
 import os
 import time
+import shutil
 
-def rotate_log_files(log_dir):
+def rotate_log_files(log_dir, max_size=1048576):
   """Rotates all log files in the specified directory that have surpassed the 10MB size.
 
   Args:
@@ -16,25 +17,22 @@ def rotate_log_files(log_dir):
     #10MB = 1048576
     #100MB = 104857600
     #for testing = 100000
-    if os.path.isfile(filepath) and os.path.getsize(filepath) > 104857600:
-      # The file size is greater than 10MB, so rotate it.
+    if os.path.isfile(filepath) and os.path.getsize(filepath) > max_size and "rotation" not in filepath:
+      # The file size is greater than 10MB, and does not contain the word rotation, so rotate it.
       logging.info("Rotating log file: %s", filepath)
-      
-      #TODO: copiar el archivo y mantener el size, validar si ya se le hizo una validacion con una palabra if path contains rotation no validation needed
+
+      # Get the current timestamp.
+      timestamp = time.strftime("%Y%m%d_%H%M%S")
+
+      # Rename the log file to include the current timestamp.
+      os.rename(filepath, filepath + ".rotation.%s" % timestamp)
 
       # Create a new file with the original name.
       with open(filepath, "w") as f:
         pass
 
-      # Rename the original file by appending the current date and time.
-      new_filepath = filepath + ".%s" % time.strftime("%Y%m%d_%H%M%S")
-      os.rename(filepath, new_filepath)
-      print("File that weight more than 10MB: ", filepath)
-      print("New File name: ", new_filepath)
-
-
+      #In theory its done it appends rotation and date and time to the opriginal file and create a new one empty with the original name to keep writing the logs I guess...
 
 if __name__ == "__main__":
   log_dir = "/home/ochoamendoza"
   rotate_log_files(log_dir)
-
