@@ -31,3 +31,6 @@ fi
 #To schedule the script to run 4 times per day, you would add the following line to your crontab file:
 #0 12 * * * /path/to/script.sh
 #This line tells the crontab to run the script at 12:00 AM, 6:00 AM, 12:00 PM, and 6:00 PM every day.
+
+#Configure the mail, needs to be on a different computer
+#https://mailtrap.io/blog/linux-send-email/
