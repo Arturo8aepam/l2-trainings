@@ -38,3 +38,8 @@ def add_income():
     # Return a success message
     return jsonify(original_json)
         
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)
+
+#Flask automatically sets the application port to 5000
