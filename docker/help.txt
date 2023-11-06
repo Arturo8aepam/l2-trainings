@@ -1,0 +1,13 @@
+https://flask.palletsprojects.com/en/3.0.x/quickstart/
+export FLASK_APP=./main.py
+flask --debug run -h 0.0.0.0
+
+http://127.0.0.1:5000
+https://5000-cs-1020804010302-default.cs-us-central1-brqy.cloudshell.dev/?authuser=0
+https://8080-cs-1020804010302-default.cs-us-central1-brqy.cloudshell.dev/?authuser=0
+
+
+https://flask.palletsprojects.com/en/1.1.x/installation/#python-version
+
+docker build -t demo-dockerflask:v.0.1 .
+docker run -d -p 8080:5000 demo-dockerflask:v.0.1
