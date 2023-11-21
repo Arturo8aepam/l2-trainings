@@ -1,5 +1,8 @@
 provider "kubectl" {
-  load_config_file       = false
+    host                   = "https://8080-cs-1020804010302-default.cs-us-central1-brqy.cloudshell.dev"
+    load_config_file       = false
+    config_path            = "/config.yaml" 
+    insecure               = true  
 }
 
 resource "kubectl_manifest" "test" {
