@@ -1,0 +1,5 @@
+https://support.hashicorp.com/hc/en-us/articles/360046090994-Terraform-runs-failing-with-x509-certificate-signed-by-unknown-authority-error
+https://developer.hashicorp.com/terraform/enterprise/replicated/install/interactive/installer#certificate-authority-ca-bundle
+https://minikube.sigs.k8s.io/docs/handbook/untrusted_certs/
+https://www.digicert.com/kb/ssl-support/pem-ssl-creation.htm
+https://www.yamllint.com/
