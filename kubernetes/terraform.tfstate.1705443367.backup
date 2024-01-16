@@ -1,0 +1,47 @@
+{
+  "version": 4,
+  "terraform_version": "1.6.6",
+  "serial": 5,
+  "lineage": "4b77e98e-4ee4-c23d-2fe2-c8cd154b3cca",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "kubectl_manifest",
+      "name": "test",
+      "provider": "provider[\"registry.terraform.io/gavinbunney/kubectl\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "api_version": "v1",
+            "apply_only": false,
+            "force_conflicts": false,
+            "force_new": false,
+            "id": "/api/v1/namespaces/hello-kubernetes-ns",
+            "ignore_fields": null,
+            "kind": "Namespace",
+            "live_manifest_incluster": "18a8f5aa0d5e86cdc3dbdf4bfaebc6fd1112dc2878aa60e409a2e76ff0d79d76",
+            "live_uid": "a30110ca-ecef-47f3-9f0f-a6f338521b4d",
+            "name": "hello-kubernetes-ns",
+            "namespace": null,
+            "override_namespace": null,
+            "sensitive_fields": null,
+            "server_side_apply": false,
+            "timeouts": null,
+            "uid": "a30110ca-ecef-47f3-9f0f-a6f338521b4d",
+            "validate_schema": true,
+            "wait": null,
+            "wait_for_rollout": true,
+            "yaml_body": "apiVersion: v1\nkind: Namespace\nmetadata:\n  name: hello-kubernetes-ns\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: hellow-kubernetesdeploynginx\n  namespace: hello-kubernetes-ns\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: my-app\n  template:\n    metadata:\n      labels:\n        app: my-app\n    spec:\n      containers:\n        - name: hello-kubernetes\n          image: nginx\n          ports:\n          - containerPort: 8080\n---\napiVersion: v1\nkind: Service\nmetadata:\n  name: hellow-kubernetesservice\n  namespace: hello-kubernetes-ns\nspec:\n  type: NodePort\n  selector:\n    app: my-app\n  ports:\n    - name: http\n      port: 80\n      targetPort: 80\n",
+            "yaml_body_parsed": "apiVersion: v1\nkind: Namespace\nmetadata:\n  name: hello-kubernetes-ns\n",
+            "yaml_incluster": "18a8f5aa0d5e86cdc3dbdf4bfaebc6fd1112dc2878aa60e409a2e76ff0d79d76"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDB9LCJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
