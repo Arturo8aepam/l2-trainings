@@ -28,6 +28,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: hellow-kubernetesservice
+  namespace: hello-kubernetes-ns
 spec:
   type: NodePort
   selector:
