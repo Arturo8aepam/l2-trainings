@@ -4,7 +4,7 @@ import os
 import time
 import shutil
 
-def rotate_log_files(log_dir, max_size=1048576):
+def rotate_log_files(log_dir, max_size=21000):
   """Rotates all log files in the specified directory that have surpassed the 10MB size.
 
   Args:
