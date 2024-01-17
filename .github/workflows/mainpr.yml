@@ -1,52 +1,43 @@
-name: Auto Merge Owner PR
+name: CI Pipeline
 
 on:
   pull_request:
+    types: [closed]
     branches: [main]
 
 jobs:
   bandit-scan-and-build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: Bandit Scan
-    - uses: shundor/python-bandit-scan@v1.0
-      with:
-          path: "././python/maintask1.py"  #Specify the path to scan
+      - uses: actions/checkout@v3
+
+      - name: Bandit Security Scan
+        uses: shundor/bandit-scan@v1
+        with:
+          path: "."
           level: high
           confidence: high
+
+      - name: Quality Gate
+        run: |
+          # Parse SARIF report and check for High-Severity issues
+          if [ "$(jq '.runs[0].results.[] | select(.level == "high") | length' bandit.sarif)" -gt 0 ]; then
+            echo "High-Severity issues found! Failing the build."
+            exit 1
+          fi
+
+      - uses: docker/setup-buildx-action@v2
+      
+      - name: Login to Docker Hub        
+        uses: docker/login-action@v2        
+        with:          
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
           
-    - name: Check for High-Severity issues
-      run: |
-        # Parse SARIF report and check for High-Severity issues
-        if [ "$(jq '.runs[0].results.[] | select(.level == "high") | length' bandit.sarif)" -gt 0 ]; then
-          echo "High-Severity issues found! Failing the build."
-          exit 1
-        fi
-        
-    - uses: docker/setup-buildx-action@v2
-    - uses: docker/login-action@v2
-      with: 
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_TOKEN }}
-        
-    - name: Build and push Docker images
-    - uses: docker/build-push-action@v3
-      with:
-        context: .
-        push: true
-        tags:   | 
-          your-username/your-repo:x.y.z
-        
-  merge:        
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: hmarr/auto-approve-action@v2.0.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-    
-    - uses: managedkaos/merge-pull-request@v1.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push Docker Image        
+        uses: docker/build-push-action@v3      
+        with:
+          context: .
+          push: true
+          tags: |
+            your-username/your-repo:x.y.z
