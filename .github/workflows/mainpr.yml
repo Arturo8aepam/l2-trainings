@@ -5,16 +5,18 @@ on:
     branches: [main]
 
 jobs:
-  scan:
+  bandit-scan-and-build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    
     - name: Bandit Scan
     - uses: shundor/python-bandit-scan@v1.0
       with:
           path: "././python/maintask1.py"  #Specify the path to scan
           level: high
           confidence: high
+          
     - name: Check for High-Severity issues
       run: |
         # Parse SARIF report and check for High-Severity issues
@@ -22,11 +24,13 @@ jobs:
           echo "High-Severity issues found! Failing the build."
           exit 1
         fi
+        
     - uses: docker/setup-buildx-action@v2
     - uses: docker/login-action@v2
       with: 
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        
     - name: Build and push Docker images
     - uses: docker/build-push-action@v3
       with:
